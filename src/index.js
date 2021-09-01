@@ -1,10 +1,7 @@
 import './css/style.css';
 (function init(){
-
     window.$ = require("jquery");
-
-    let template = $(`<div id="container"><canvas id="canvas"></canvas></div>`);
-    $('body').append(template);
+    $('body').append($(`<div id="container"><canvas id="canvas"></canvas></div>`));
 
     let canvas = document.getElementById("canvas");
         let width,height;
@@ -16,6 +13,7 @@ import './css/style.css';
          function draw(){
            let ctx = canvas.getContext("2d"); 
            ctx.beginPath();
+          //  ctx.setLineDash([5]);
            let radiusX = 100;
            let radiusY = 120;
            var startAngle = (Math.PI/180)* 30;
@@ -26,6 +24,7 @@ import './css/style.css';
            ctx.closePath();
            
            ctx.beginPath();
+          //  ctx.setLineDash([5]);
            var startAngle1 = (Math.PI/180)* -58;
            var endAngle1 = (Math.PI/180)* 238;
            ctx.arc(width/2, height/2 + 180, 180, startAngle1, endAngle1, false);
@@ -33,7 +32,7 @@ import './css/style.css';
            ctx.closePath();
            
            ctx.beginPath();
-      //   ctx.setLineDash([5]);
+           ctx.setLineDash([5]);
            let rectW = 200;
            let rectH = 100;
            let rectX = (ctx.canvas.width * .5) - (rectW * .5);
@@ -41,6 +40,19 @@ import './css/style.css';
            let rectY = height-rectH - 10;
            ctx.strokeRect(rectX,rectY, 200, 100);
            ctx.closePath();
+
+
+
+           ctx.beginPath();
+           ctx.arc(100, 100, 80, (Math.PI/180)* - 100, (Math.PI/180)* - 180, true);
+           ctx.stroke();
+           ctx.closePath();
+
+           ctx.beginPath();
+           ctx.arc(200, 100, 80, (Math.PI/180)* 180, (Math.PI/180)* -100, false);
+           ctx.stroke();
+           ctx.closePath();
+
         }
         
         function init(){
