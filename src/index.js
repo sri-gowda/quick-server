@@ -16,7 +16,7 @@ import './css/style.css';
               video: {
                 // aspectRatio: 16/9
               },
-              audio: true
+              audio: false
             };
             navigator.mediaDevices.getUserMedia(constraints).then(stream => {
               vidEl = $("#vid")[0];
@@ -32,56 +32,85 @@ import './css/style.css';
           }
         }
 
+
         function draw(){
-           let ctx = canvas.getContext("2d"); 
+          let ctx = canvas.getContext("2d"); 
+          let isMobile = height > width;
+
+          // draw oval start
+          let ellipseXCoord,ellipseYCoord,radiusX,radiusY,startAngle,endAngle,headHeightFromTop;
+          console.log("isMobile",isMobile);
+           if(isMobile){
+              ellipseXCoord = (width/100) * 50;
+              ellipseYCoord = (height/100) * 31;
+              radiusX = width/100 * 30;
+              radiusY = height/100 * 30;
+              startAngle = (Math.PI/180)* 0; //have to do Math.PI/180 to use degrees
+              endAngle = (Math.PI/180)* 360;
+           }else{
+              ellipseXCoord = (width/100) * 25;
+              ellipseYCoord = (height/100) * 40;
+              radiusX = width/100 * 20;
+              radiusY = height/100 * 35;
+              startAngle = (Math.PI/180)* 0; //have to do Math.PI/180 to use degrees
+              endAngle = (Math.PI/180)* 360;
+           }
            ctx.beginPath();
           //  ctx.setLineDash([5]);
-           let radiusX = width/4;
-           let radiusY = height/2.8;
-           var startAngle = (Math.PI/180)* 30;
-           var endAngle = (Math.PI/180)* -210;
-           let headHeightFromTop = (height/100) * 10;
-           ctx.ellipse(width/2, height/2 - headHeightFromTop , radiusX, radiusY, 0, startAngle, endAngle, true);
+           ctx.ellipse(ellipseXCoord, ellipseYCoord, radiusX, radiusY, 0, startAngle, endAngle, true);
            ctx.clearRect(width,0, -width, height);
            ctx.strokeStyle = "blue"
            ctx.stroke();
            ctx.closePath();
+          // draw oval end
            
 
-           let shoulderHeightFromTop = (height/100) * 60;
-           let shoulderRadius = width/2;
-           ctx.beginPath();
-          //  ctx.setLineDash([5]);
-           var startAngle1 = (Math.PI/180)* -58;
-           var endAngle1 = (Math.PI/180)* 238;
-           ctx.arc(width/2, height/2 + shoulderHeightFromTop, shoulderRadius, startAngle1, endAngle1, false);
-           ctx.strokeStyle = "blue"
-           ctx.stroke();
-           ctx.closePath();
-           
-           ctx.beginPath();
-          //  ctx.setLineDash([5]);
-           let rectW = width/2.2;
-           let rectH = width/3.5;
-           let rectX = (ctx.canvas.width * .5) - (rectW * .5);
-      //      let rectY = (ctx.canvas.height * .5) - (rectH * .5);
-           let rectY = height-rectH - height/100 * 2;
-           ctx.strokeRect(rectX,rectY, rectW, rectH);
-           ctx.closePath();
+          // draw shoulder start
 
-
-
+          //  let shoulderHeightFromTop = (height/100) * 60;
+          //  let shoulderRadius = width/2;
           //  ctx.beginPath();
-          //  ctx.arc(100, 100, 80, (Math.PI/180)* - 100, (Math.PI/180)* - 180, true);
+          // //  ctx.setLineDash([5]);
+          //  var startAngle1 = (Math.PI/180)* -58;
+          //  var endAngle1 = (Math.PI/180)* 238;
+          //  ctx.arc(width/2, height/2 + shoulderHeightFromTop, shoulderRadius, startAngle1, endAngle1, false);
+          //  ctx.strokeStyle = "blue"
           //  ctx.stroke();
           //  ctx.closePath();
 
-          //  ctx.beginPath();
-          //  ctx.arc(200, 100, 80, (Math.PI/180)* 180, (Math.PI/180)* -100, false);
-          //  ctx.stroke();
-          //  ctx.closePath();
+          // draw shoulder end
+
+          // draw rectangle start
+           let rectH,rectW,rectX,rectY;
+           ctx.beginPath();
+
+           if(isMobile){
+            //  ctx.setLineDash([5]);
+            rectW = width/100 * 80;
+            rectH = height/100 * 35;
+            rectX = (ctx.canvas.width * .5) - (rectW * .5);
+            // rectY = (ctx.canvas.height * .5) - (rectH * .5);
+            rectY = height-rectH - height/100 * 2;
+           }else{
+           //  ctx.setLineDash([5]);
+            rectW = width/100 * 50;
+            rectH = height/100 * 40;
+          //  let rectX = (ctx.canvas.width * .5) - (rectW * .5);
+          //  let rectY = (ctx.canvas.height * .5) - (rectH * .5);
+            rectX = width/100 * 45;
+            rectY = height-rectH - height/100 * 2;
+           }
+         
+           ctx.strokeStyle = "green"
+           ctx.strokeRect(rectX, rectY, rectW, rectH);
+           ctx.closePath();
+
+           // draw rectange end
 
         }
+
+
+
 
         function startCameraCallback(){
           setTimeout(() => {
