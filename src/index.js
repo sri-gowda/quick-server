@@ -36,33 +36,37 @@ import './css/style.css';
            let ctx = canvas.getContext("2d"); 
            ctx.beginPath();
           //  ctx.setLineDash([5]);
-           let radiusX = 140;
-           let radiusY = 160;
+           let radiusX = width/4;
+           let radiusY = height/2.8;
            var startAngle = (Math.PI/180)* 30;
            var endAngle = (Math.PI/180)* -210;
-           ctx.ellipse(width/2, height/2 - 60, radiusX, radiusY, 0, startAngle, endAngle, true);
+           let headHeightFromTop = (height/100) * 10;
+           ctx.ellipse(width/2, height/2 - headHeightFromTop , radiusX, radiusY, 0, startAngle, endAngle, true);
            ctx.clearRect(width,0, -width, height);
            ctx.strokeStyle = "blue"
            ctx.stroke();
            ctx.closePath();
            
+
+           let shoulderHeightFromTop = (height/100) * 60;
+           let shoulderRadius = width/2;
            ctx.beginPath();
           //  ctx.setLineDash([5]);
            var startAngle1 = (Math.PI/180)* -58;
            var endAngle1 = (Math.PI/180)* 238;
-           ctx.arc(width/2, height/2 + 400, 400, startAngle1, endAngle1, false);
+           ctx.arc(width/2, height/2 + shoulderHeightFromTop, shoulderRadius, startAngle1, endAngle1, false);
            ctx.strokeStyle = "blue"
            ctx.stroke();
            ctx.closePath();
            
            ctx.beginPath();
           //  ctx.setLineDash([5]);
-           let rectW = 200;
-           let rectH = 100;
+           let rectW = width/2.2;
+           let rectH = width/3.5;
            let rectX = (ctx.canvas.width * .5) - (rectW * .5);
       //      let rectY = (ctx.canvas.height * .5) - (rectH * .5);
-           let rectY = height-rectH - 10;
-           ctx.strokeRect(rectX,rectY, 200, 100);
+           let rectY = height-rectH - height/100 * 2;
+           ctx.strokeRect(rectX,rectY, rectW, rectH);
            ctx.closePath();
 
 

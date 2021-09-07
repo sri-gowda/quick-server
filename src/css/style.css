@@ -1,7 +1,8 @@
 #container{
     position: relative;
     height: 100vh;
-    width: 100%;
+    /* width: 100%; */
+    max-width: 700px;
     /* background: lightblue; */
     margin:auto;
     padding:0;
